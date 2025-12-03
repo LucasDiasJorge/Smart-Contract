@@ -1,0 +1,91 @@
+@Smart_Contract_HostAddress = http://localhost:5258
+
+### =====================
+### SAÚDE
+### =====================
+
+### Verificar disponibilidade do servidor gRPC conectado
+GET {{Smart_Contract_HostAddress}}/api/grpc/health
+Accept: application/json
+
+### =====================
+### GRAFOS
+### =====================
+
+### Criar um novo grafo remoto
+POST {{Smart_Contract_HostAddress}}/api/graphs
+Content-Type: application/json
+
+{
+    "graphId": "contacts-main",
+    "graphType": 1,
+    "description": "Grafo principal de contatos"
+}
+
+### Listar todos os grafos
+GET {{Smart_Contract_HostAddress}}/api/graphs
+Accept: application/json
+
+### Obter detalhes de um grafo
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main
+Accept: application/json
+
+### Verificar integridade de um grafo
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/verify
+Accept: application/json
+
+### Validar todos os grafos
+GET {{Smart_Contract_HostAddress}}/api/graphs/validate/all
+Accept: application/json
+
+### =====================
+### BLOCOS / CONTATOS
+### =====================
+
+### Adicionar um contato (bloco) ao grafo remoto
+POST {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/blocks
+Content-Type: application/json
+
+{
+    "contact": {
+        "name": "João Silva",
+        "email": "joao.silva@email.com",
+        "phone": "+55 11 99999-9999"
+    },
+    "crossReferences": []
+}
+
+### Adicionar outro contato
+POST {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/blocks
+Content-Type: application/json
+
+{
+    "contact": {
+        "name": "Maria Santos",
+        "email": "maria.santos@email.com",
+        "phone": "+55 21 88888-8888"
+    },
+    "crossReferences": []
+}
+
+### Obter o último bloco
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/blocks/latest
+Accept: application/json
+
+### Obter blocos por range (altura 0 a 5)
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/blocks/range?startHeight=0&endHeight=5
+Accept: application/json
+
+### Obter um bloco específico
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/blocks/{hash}
+Accept: application/json
+
+### Listar todos os contatos registrados
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/contacts
+Accept: application/json
+
+### Obter um contato específico a partir do hash do bloco
+GET {{Smart_Contract_HostAddress}}/api/graphs/contacts-main/contacts/{hash}
+Accept: application/json
+
+###
