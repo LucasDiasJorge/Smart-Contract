@@ -27,7 +27,7 @@ Edite o endereço do servidor gRPC em `appsettings.json` (ou `appsettings.Develo
 1. Restaurar e compilar:
 
 ```powershell
-cd "C:\Users\Lucas Jorge\Documents\Default Projects\Others\Smart-Contract"
+cd "..\Smart-Contract"
 dotnet build
 ```
 
@@ -69,6 +69,9 @@ Consulte `Smart-Contract.http` para exemplos prontos de requisições.
 - Primeiro crie um grafo (`POST /api/graphs`), depois adicione blocos e consulte.
 
 ## gRPC / Protobuf
+
+Protobuf (Protocol Buffers) é um mecanismo de serialização de dados eficiente, multiplataforma e de código aberto do Google, usado para estruturar dados de forma compacta e rápida para comunicação entre sistemas (RPC, gRPC) ou armazenamento, definindo a estrutura em arquivos .proto, compilando-os para gerar código em diversas linguagens e trocando dados em formato binário, muito mais leve e rápido que XML ou JSON. 
+
 O arquivo `blockchain.proto` contém a definição do serviço e mensagens. O projeto está configurado para gerar classes cliente a partir do `.proto` (veja `Smart-Contract.csproj` com `Protobuf Include="blockchain.proto" GrpcServices="Client"`).
 
 Se modificar o `.proto`, será necessário reconstruir o projeto para regenerar as classes.
@@ -87,8 +90,6 @@ $env:ASPNETCORE_ENVIRONMENT = 'Development'
 dotnet run
 ```
 
-## Histórico de commits (resumo)
-O repositório foi desenvolvido com commits pequenos e incrementais: inicialização do projeto, adição de modelos, serviço em memória (POC), introdução do cliente gRPC, refatoração para delegar ao backend gRPC, endpoints REST, e documentação/HTTP-scratch file.
 
 ## Próximos passos sugeridos
 - Opcional: migrar rotas do `Program.cs` para controllers na pasta `Controllers` (se desejar organização por MVC).
@@ -96,9 +97,3 @@ O repositório foi desenvolvido com commits pequenos e incrementais: inicializa�
 - Adicionar autenticação/SSL para calls gRPC em produção.
 
 ---
-Se quiser, eu posso:
-- criar controllers em `Controllers/` e mover endpoints (faço isso agora se desejar),
-- gerar commits reais com as mensagens planejadas,
-- ou habilitar abertura automática do Swagger na inicialização.
-
-Escolha uma opção ou peça outra melhoria e eu implemento.
